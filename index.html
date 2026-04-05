@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Saiful Islam — Data Analyst · Fraud Detection · BI · London</title>
+<meta name="description" content="Saiful Islam — Data & Business Analyst in London. SQL, Power BI, XGBoost. Fraud detection +30%, MSc Business Analytics (Merit). Open to analyst roles."/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Saiful Islam — Data Analyst · London"/>
+<meta property="og:description" content="SQL · Power BI · XGBoost · Fraud Detection +30% · MSc Business Analytics. Open to analyst roles in London."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://saiful-islamy.github.io/"/>
+<meta property="og:image" content="https://saiful-islamy.github.io/preview.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Saiful Islam — Data Analyst · London"/>
+<meta name="twitter:description" content="SQL · Power BI · XGBoost · Fraud Detection +30% · MSc Business Analytics."/>
+<link rel="canonical" href="https://saiful-islamy.github.io/"/>
+
+<!-- Theme color for mobile browsers -->
+<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)"/>
+
+<!-- Favicon placeholder -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>"/>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Saiful Islam",
+  "jobTitle": "Data Analyst & Business Analyst",
+  "email": "saiful.islamy@outlook.com",
+  "telephone": "+447404421917",
+  "url": "https://saiful-islamy.github.io",
+  "sameAs": ["https://linkedin.com/in/saifuly","https://github.com/saiful-islamy"],
+  "address": {"@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB"},
+  "knowsAbout": ["SQL","Power BI","Tableau","Python","R","XGBoost","Fraud Detection","Business Analysis","BPMN"]
+}
+</script>
+
+<!-- Prevent theme flash: set theme before paint -->
+<script>
+(function(){
+  var s = localStorage.getItem('theme');
+  var d = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:       #f6f4ef;
+  --surface:  #ffffff;
+  --surface2: #f0ede7;
+  --border:   #e2ddd6;
+  --text:     #1a1814;
+  --muted:    #6b6660;
+  --faint:    #9b9790;
+  --accent:   #b84a1e;
+  --accent2:  #1e4d6b;
+  --green:    #22c55e;
+  --shadow:   0 2px 16px rgba(26,24,20,.07);
+  --shadow-lg:0 8px 40px rgba(26,24,20,.10);
+  --r:        0.5rem;
+  --r-full:   9999px;
+  --trans:    180ms cubic-bezier(.16,1,.3,1);
+  --max:      1100px;
+}
+[data-theme="dark"] {
+  --bg:       #141210;
+  --surface:  #1c1a17;
+  --surface2: #222018;
+  --border:   #2e2c28;
+  --text:     #e8e4dc;
+  --muted:    #a8a49c;
+  --faint:    #6e6a62;
+  --accent:   #e06535;
+  --accent2:  #5ba8c8;
+  --shadow:   0 2px 16px rgba(0,0,0,.3);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.4);
+}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:5rem;-webkit-text-size-adjust:none}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:1rem;-webkit-font-smoothing:antialiased;transition:background var(--trans),color var(--trans)}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none;transition:color var(--trans)}
+button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
+ul{list-style:none}
+
+/* ── LAYOUT ── */
+.wrap{width:min(calc(100% - 2.5rem),var(--max));margin-inline:auto}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  transition:background var(--trans),border-color var(--trans);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:.9rem 0;
+}
+.logo{
+  font-family:'Lora',serif;font-size:1.15rem;font-weight:700;
+  letter-spacing:-.02em;
+}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{
+  font-family:'DM Mono',monospace;font-size:.7rem;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--muted);
+}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.theme-btn{
+  width:2.25rem;height:2.25rem;border-radius:var(--r-full);
+  border:1px solid var(--border);background:var(--surface);
+  display:grid;place-items:center;transition:border-color var(--trans),background var(--trans);
+}
+.theme-btn:hover{border-color:var(--muted)}
+.theme-btn svg{width:1rem;height:1rem;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:.4rem;padding:.7rem 1.4rem;border-radius:var(--r-full);
+  font-size:.82rem;font-weight:500;border:1px solid transparent;
+  transition:all var(--trans);white-space:nowrap;
+}
+.btn-primary{background:var(--text);color:var(--bg)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn-ghost{background:var(--surface);border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--muted)}
+
+/* ── HERO ── */
+.hero{padding:5rem 0 4rem}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center}
+.hero-eyebrow{
+  font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.hero-eyebrow::before{content:'';width:1.5rem;height:1px;background:var(--accent);display:block}
+h1{
+  font-family:'Lora',serif;font-size:clamp(2.8rem,5.5vw,4.8rem);
+  font-weight:700;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.25rem;
+}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-lead{font-size:1.05rem;color:var(--muted);max-width:42ch;margin-bottom:2rem;line-height:1.8}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.75rem}
+.hero-pills{display:flex;gap:.5rem;flex-wrap:wrap}
+.pill{
+  padding:.35rem .8rem;border-radius:var(--r-full);
+  font-size:.72rem;color:var(--muted);
+  background:var(--surface2);border:1px solid var(--border);
+}
+
+/* STATS CARD */
+.stats-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:1rem;box-shadow:var(--shadow-lg);padding:2rem;
+}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:.5rem;overflow:hidden;margin-bottom:1.5rem}
+.stat{background:var(--surface);padding:1.25rem 1rem}
+.stat-n{
+  font-family:'Lora',serif;font-size:2rem;font-weight:700;
+  color:var(--accent);line-height:1;margin-bottom:.3rem;
+}
+.stat-l{font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.avail{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--muted)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+
+/* ── MOBILE HAMBURGER ── */
+.hamburger{
+  display:none;width:2.25rem;height:2.25rem;border-radius:var(--r-full);
+  border:1px solid var(--border);background:var(--surface);
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  cursor:pointer;transition:border-color var(--trans);
+}
+.hamburger:hover{border-color:var(--muted)}
+.hamburger span{
+  display:block;width:1.1rem;height:1.5px;background:var(--text);
+  transition:all .3s ease;transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:99;
+  background:var(--bg);flex-direction:column;
+  align-items:center;justify-content:center;gap:2.5rem;
+  opacity:0;transition:opacity .3s ease;
+}
+.mobile-menu.open{display:flex;opacity:1}
+.mobile-menu a{
+  font-family:'Lora',serif;font-size:2rem;font-weight:700;
+  color:var(--text);letter-spacing:-.02em;
+  transition:color var(--trans);
+}
+.mobile-menu a:hover{color:var(--accent)}
+.mobile-menu .mobile-cv{
+  margin-top:1rem;font-family:'DM Mono',monospace;
+  font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.75rem 1.75rem;border:2px solid var(--accent);
+  color:var(--accent);border-radius:var(--r-full);
+}
+
+/* ── SKIP LINK ── */
+.skip-link{
+  position:absolute;left:-999px;top:1rem;
+  background:var(--accent);color:#fff;padding:.5rem 1rem;
+  border-radius:var(--r);z-index:999;font-size:.85rem;
+}
+.skip-link:focus{left:1rem}
+
+/* ── TICKER PAUSE ON HOVER ── */
+.ticker:hover .ticker-inner{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.ticker-inner{animation:none!important}}
+
+/* ── TICKER ── */
+.ticker{background:var(--text);color:var(--bg);padding:.75rem 0;overflow:hidden}
+.ticker-inner{display:flex;gap:2.5rem;animation:tick 28s linear infinite;width:max-content}
+.ticker-item{
+  font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;
+  text-transform:uppercase;opacity:.6;flex-shrink:0;display:flex;align-items:center;gap:.5rem;
+}
+.ticker-item::before{content:'◆';color:var(--accent);opacity:1}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.section{padding:5rem 0;border-top:1px solid var(--border)}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--accent);margin-bottom:.6rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.eyebrow::before{content:'';width:1.2rem;height:1px;background:var(--accent);display:block}
+h2{
+  font-family:'Lora',serif;font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-bottom:1rem;
+}
+.section-lead{color:var(--muted);max-width:55ch;margin-bottom:3rem;font-size:.97rem}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-text p{color:var(--muted);margin-bottom:1rem;font-size:.97rem}
+.about-text strong{color:var(--text);font-weight:500}
+.cert-grid{display:flex;flex-direction:column;gap:.6rem;margin-top:2rem}
+.cert{
+  display:flex;align-items:center;gap:.85rem;
+  padding:.75rem 1rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r);
+  font-size:.82rem;transition:border-color var(--trans);
+}
+.cert:hover{border-color:var(--accent)}
+.cert-badge{
+  width:2rem;height:2rem;border-radius:.3rem;
+  background:var(--accent);color:#fff;
+  display:grid;place-items:center;font-size:.75rem;font-weight:700;flex-shrink:0;
+}
+
+/* ── EXPERIENCE ── */
+.exp-list{display:flex;flex-direction:column}
+.exp{
+  display:grid;grid-template-columns:180px 1fr;gap:2.5rem;
+  padding:2rem 0;border-bottom:1px solid var(--border);
+}
+.exp:first-child{border-top:1px solid var(--border)}
+.exp-period{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.06em;color:var(--faint);margin-bottom:.3rem}
+.exp-co{font-size:.82rem;font-weight:500;color:var(--accent2)}
+.exp-role{font-family:'Lora',serif;font-size:1.2rem;font-weight:600;margin-bottom:.6rem;letter-spacing:-.01em}
+.exp-desc{color:var(--muted);font-size:.92rem;margin-bottom:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{
+  font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:.28rem .65rem;
+  background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-full);
+  color:var(--muted);
+}
+
+/* ── PROJECTS ── */
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.project-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.75rem;
+  display:flex;flex-direction:column;gap:1rem;
+  transition:transform var(--trans),box-shadow var(--trans),border-color var(--trans);
+}
+.project-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--muted)}
+.project-card.featured{
+  grid-column:span 2;
+  background:var(--text);color:var(--bg);border-color:var(--text);
+}
+.project-card.featured .project-desc{color:color-mix(in srgb,var(--bg) 65%,transparent)}
+.project-card.featured .chip{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.6)}
+.project-card.featured .project-num{color:var(--accent)}
+.project-card.featured:hover{border-color:var(--accent)}
+.project-num{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;color:var(--faint)}
+.project-title{font-family:'Lora',serif;font-size:1.2rem;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.project-desc{font-size:.88rem;color:var(--muted);line-height:1.7}
+.project-link{
+  font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent);
+  display:inline-flex;align-items:center;gap:.3rem;margin-top:auto;
+  transition:gap var(--trans);
+}
+.project-link:hover{gap:.6rem}
+.project-link::after{content:'→'}
+
+/* ── WRITING ── */
+.writing-bg{background:var(--surface2)}
+.blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.blog-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.75rem;
+  transition:transform var(--trans),box-shadow var(--trans),border-color var(--trans);
+  cursor:pointer;
+}
+.blog-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--muted)}
+.blog-card.big{
+  grid-column:span 2;
+  background:var(--text);color:var(--bg);
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+}
+.blog-card.big .blog-date{color:var(--accent)}
+.blog-card.big .blog-title{color:var(--bg);font-size:1.5rem}
+.blog-card.big .blog-excerpt{color:color-mix(in srgb,var(--bg) 60%,transparent)}
+.blog-date{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.blog-title{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;margin-bottom:.6rem;line-height:1.3;letter-spacing:-.01em}
+.blog-excerpt{font-size:.86rem;color:var(--muted);line-height:1.7}
+.blog-quote{
+  font-family:'Lora',serif;font-style:italic;font-size:.9rem;
+  border-left:2px solid var(--accent);padding-left:1.25rem;
+  color:color-mix(in srgb,var(--bg) 75%,transparent);line-height:1.8;
+}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem}
+.skill-card h3{font-family:'Lora',serif;font-size:1rem;font-weight:600;margin-bottom:1rem;color:var(--text)}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.service{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.75rem;position:relative;overflow:hidden;
+  transition:transform var(--trans),box-shadow var(--trans),border-color var(--trans);
+}
+.service::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--trans);
+}
+.service:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--muted)}
+.service:hover::after{transform:scaleX(1)}
+.service-icon{font-size:1.6rem;margin-bottom:1rem}
+.service-name{font-family:'Lora',serif;font-size:1rem;font-weight:600;margin-bottom:.5rem}
+.service-desc{font-size:.84rem;color:var(--muted);line-height:1.7;margin-bottom:.9rem}
+.service-price{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:.04em}
+
+/* ── CONTACT FORM ── */
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.form-group input,.form-group textarea{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:.75rem 1rem;
+  font:inherit;font-size:.92rem;color:var(--text);
+  transition:border-color var(--trans);resize:vertical;
+}
+.form-group input:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--accent);
+}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--faint)}
+.form-note{font-size:.8rem;color:var(--muted);margin-top:.5rem;text-align:center}
+.form-note a{color:var(--accent)}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:2rem}
+.contact-links{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+.contact-link{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.85rem 1rem;background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--r);font-size:.88rem;
+  transition:border-color var(--trans),background var(--trans);
+}
+.contact-link:hover{border-color:var(--accent);background:var(--surface)}
+.contact-link strong{font-weight:500}
+.contact-link span{color:var(--muted);font-size:.82rem;font-family:'DM Mono',monospace}
+.rtw-card{background:var(--accent);color:#fff;border-radius:var(--r);padding:2rem}
+.rtw-card h3{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;margin-bottom:.75rem}
+.rtw-card p{font-size:.88rem;opacity:.85;line-height:1.7}
+.rtw-date{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;margin-top:.85rem;opacity:.75}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--text);color:var(--bg);
+  padding:1.5rem 0;border-top:1px solid var(--border);
+}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:.75rem;
+  font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.05em;
+  opacity:.55;
+}
+footer a{color:var(--accent);opacity:1}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{padding:3.5rem 0 2.5rem}
+  .hero-grid{grid-template-columns:1fr;gap:2.5rem}
+  .stats-card{padding:1.5rem}
+  .section{padding:3.5rem 0}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .exp{grid-template-columns:1fr;gap:.4rem}
+  .exp-meta{display:flex;gap:1rem;align-items:baseline;flex-wrap:wrap}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card.featured{grid-column:span 1}
+  .blog-grid{grid-template-columns:1fr}
+  .blog-card.big{grid-column:span 1;grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;max-width:700px;margin:0 auto}
+.timeline::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2));
+  transform:translateX(-50%);
+}
+.timeline-item{
+  display:flex;justify-content:flex-end;
+  padding-right:calc(50% + 2rem);
+  margin-bottom:2.5rem;position:relative;
+  animation:fadeUp .5s ease both;
+}
+.timeline-item:nth-child(even){
+  justify-content:flex-start;
+  padding-right:0;padding-left:calc(50% + 2rem);
+}
+.timeline-item::after{
+  content:'';position:absolute;left:50%;top:1.2rem;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--bg);
+  transform:translateX(-50%);z-index:1;
+}
+.timeline-item:nth-child(even)::after{background:var(--accent2)}
+.timeline-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.25rem 1.5rem;max-width:280px;
+  transition:transform var(--trans),box-shadow var(--trans);
+}
+.timeline-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.timeline-year{
+  font-family:'DM Mono',monospace;font-size:.72rem;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:.4rem;
+}
+.timeline-item:nth-child(even) .timeline-year{color:var(--accent2)}
+.timeline-role{
+  font-family:'Lora',serif;font-size:1rem;font-weight:600;
+  margin-bottom:.25rem;line-height:1.3;
+}
+.timeline-org{font-size:.82rem;color:var(--muted);margin-bottom:.5rem}
+.timeline-detail{font-size:.78rem;color:var(--muted);line-height:1.6;font-style:italic}
+.timeline-badge{
+  display:inline-block;margin-top:.6rem;
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:var(--r-full);
+  background:rgba(184,74,30,.08);color:var(--accent);
+  border:1px solid rgba(184,74,30,.2);
+}
+.timeline-item:nth-child(even) .timeline-badge{
+  background:rgba(30,77,107,.08);color:var(--accent2);
+  border-color:rgba(30,77,107,.2);
+}
+[data-theme="dark"] .timeline-badge{background:rgba(224,101,53,.12)}
+[data-theme="dark"] .timeline-item:nth-child(even) .timeline-badge{background:rgba(91,168,200,.12)}
+.timeline-item.current::after{
+  background:var(--green);box-shadow:0 0 0 4px rgba(34,197,94,.2);
+  animation:tl-pulse 2s infinite;
+}
+@keyframes tl-pulse{
+  0%,100%{box-shadow:0 0 0 4px rgba(34,197,94,.2)}
+  50%{box-shadow:0 0 0 8px rgba(34,197,94,.05)}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.timeline-item:nth-child(1){animation-delay:.0s}
+.timeline-item:nth-child(2){animation-delay:.1s}
+.timeline-item:nth-child(3){animation-delay:.2s}
+.timeline-item:nth-child(4){animation-delay:.3s}
+.timeline-item:nth-child(5){animation-delay:.4s}
+.timeline-item:nth-child(6){animation-delay:.5s}
+@media(max-width:768px){
+  .timeline::before{left:1rem}
+  .timeline-item,.timeline-item:nth-child(even){
+    justify-content:flex-start;padding-left:3rem;padding-right:0;
+  }
+  .timeline-item::after,.timeline-item:nth-child(even)::after{left:1rem}
+  .timeline-card{max-width:100%}
+}
+
+/* ── FIT OPENER ── */
+.fit-opener{
+  margin-bottom:2rem;padding:1.5rem 1.75rem;
+  background:var(--text);border-radius:var(--r);
+  color:var(--bg);
+}
+.fit-opener-statement{
+  font-family:'Lora',serif;font-size:1.4rem;font-weight:600;
+  letter-spacing:-.01em;margin-bottom:.75rem;
+  color:var(--bg);
+}
+.fit-opener-why{
+  font-size:.9rem;line-height:1.7;
+  color:color-mix(in srgb,var(--bg) 70%,transparent);
+  margin:0;
+}
+
+/* ── WHY HIRE ME ── */
+.fit-grid{
+  border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;background:var(--surface);
+}
+.fit-header-row{
+  display:grid;grid-template-columns:1fr 56px 1fr;
+  padding:.65rem 1.5rem;background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+.fit-header-row span{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--faint);
+}
+.fit-row{
+  display:grid;grid-template-columns:1fr 56px 1fr;
+  align-items:center;border-bottom:1px solid var(--border);
+  opacity:0;transform:translateY(16px);
+  transition:opacity .5s ease,transform .5s ease;
+}
+.fit-row:last-child{border-bottom:none}
+.fit-row.fit-visible{opacity:1;transform:translateY(0)}
+.fit-req{
+  padding:1.25rem 1.5rem;font-size:.88rem;
+  color:var(--muted);background:var(--surface2);
+  font-weight:400;line-height:1.5;
+}
+.fit-check{
+  display:flex;align-items:center;justify-content:center;
+  height:100%;background:var(--surface2);position:relative;
+}
+.fit-line-left{
+  position:absolute;right:28px;top:50%;height:1px;
+  background:var(--accent);width:0;opacity:.35;
+  transition:width .4s ease .3s;
+}
+.fit-line-right{
+  position:absolute;left:28px;top:50%;height:1px;
+  background:var(--accent);width:0;opacity:.35;
+  transition:width .4s ease .3s;
+}
+.fit-row.fit-visible .fit-line-left,
+.fit-row.fit-visible .fit-line-right{width:80px}
+.check-circle{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--accent);display:flex;
+  align-items:center;justify-content:center;
+  flex-shrink:0;transform:scale(0);z-index:1;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1) .15s;
+}
+.check-circle svg{width:13px;height:13px}
+.fit-row.fit-visible .check-circle{transform:scale(1)}
+.fit-evidence{padding:1.25rem 1.5rem}
+.fit-evidence strong{
+  display:block;font-size:.88rem;font-weight:500;
+  color:var(--text);margin-bottom:.2rem;
+}
+.fit-evidence span{
+  font-size:.8rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.02em;
+}
+.fit-badge{
+  display:inline-block;margin-top:.35rem;
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:.18rem .55rem;border-radius:var(--r-full);
+  background:rgba(184,74,30,.08);color:var(--accent);
+  border:1px solid rgba(184,74,30,.2);
+}
+.fit-note{
+  margin-top:1.5rem;padding:1rem 1.25rem;
+  border-radius:var(--r);background:var(--surface);
+  border-left:2px solid var(--accent);font-size:.85rem;
+  color:var(--muted);font-style:italic;
+}
+@media(max-width:700px){
+  .fit-header-row,.fit-row{grid-template-columns:1fr}
+  .fit-check{display:none}
+  .fit-req{border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<!-- Skip link -->
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#journey" class="mobile-link">Journey</a>
+  <a href="#experience" class="mobile-link">Experience</a>
+  <a href="#projects" class="mobile-link">Projects</a>
+  <a href="#fit" class="mobile-link">Why Me</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="https://saiful-islamy.github.io/CV_Saiful_Islam.pdf" target="_blank" rel="noopener" class="mobile-cv">Download CV</a>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">Saiful<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#fit">Why Me</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#contact" class="btn btn-primary" style="display:none" id="desktopHire">Hire Me</a>
+      <a href="#contact" class="btn btn-primary hamburger-hide">Hire Me</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<main id="main-content">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">London, UK · Right to Work until 2028</div>
+      <h1>Data Analyst.<br><em>Fraud.</em> BI.<br>Prediction.</h1>
+      <p class="hero-lead">SQL · Power BI · XGBoost · BPMN 2.0. Fraud detection +30%, 71k-record ML dissertation, banking & supply chain experience. MSc Business Analytics · BCS FBA · PSPO I.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+        <a href="https://saiful-islamy.github.io/CV_Saiful_Islam.pdf" target="_blank" rel="noopener" class="btn btn-ghost">⬇ Download CV</a>
+        <a href="#projects" class="btn btn-ghost">View My Work</a>
+      </div>
+      <div class="hero-pills">
+        <span class="pill">SQL</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">Tableau</span>
+        <span class="pill">Python · R</span>
+        <span class="pill">Fraud Detection</span>
+        <span class="pill">BPMN 2.0</span>
+        <span class="pill">XGBoost</span>
+        <span class="pill">KYC · AML</span>
+      </div>
+    </div>
+    <div class="hero-right reveal">
+      <div class="stats-card">
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-n">0.787</div>
+            <div class="stat-l">ML Model AUC Score</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">71k+</div>
+            <div class="stat-l">Dissertation Records</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">30%</div>
+            <div class="stat-l">Fraud Detection Boost</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">3</div>
+            <div class="stat-l">Industries (Banking · FMCG · Fintech)</div>
+          </div>
+        </div>
+        <div class="avail">
+          <div class="dot"></div>
+          Open to analyst roles in banking &amp; fintech
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">SQL</span>
+    <span class="ticker-item">Power BI</span>
+    <span class="ticker-item">Tableau</span>
+    <span class="ticker-item">XGBoost</span>
+    <span class="ticker-item">Python · R</span>
+    <span class="ticker-item">BPMN 2.0</span>
+    <span class="ticker-item">Fraud Detection</span>
+    <span class="ticker-item">Credit Risk</span>
+    <span class="ticker-item">Requirements Engineering</span>
+    <span class="ticker-item">Stakeholder Management</span>
+    <span class="ticker-item">KYC · AML</span>
+    <span class="ticker-item">Agile · JIRA</span>
+    <span class="ticker-item">Advanced Excel</span>
+    <span class="ticker-item">UAT</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">SQL</span>
+    <span class="ticker-item">Power BI</span>
+    <span class="ticker-item">Tableau</span>
+    <span class="ticker-item">XGBoost</span>
+    <span class="ticker-item">Python · R</span>
+    <span class="ticker-item">BPMN 2.0</span>
+    <span class="ticker-item">Fraud Detection</span>
+    <span class="ticker-item">Credit Risk</span>
+    <span class="ticker-item">Requirements Engineering</span>
+    <span class="ticker-item">Stakeholder Management</span>
+    <span class="ticker-item">KYC · AML</span>
+    <span class="ticker-item">Agile · JIRA</span>
+    <span class="ticker-item">Advanced Excel</span>
+    <span class="ticker-item">UAT</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">About Me</div>
+        <h2>Analyst.<br>Problem Solver.<br>Data-Driven.</h2>
+        <p class="section-lead" style="margin-bottom:0">Building a career at the intersection of data, banking, and financial systems.</p>
+      </div>
+      <div class="about-text reveal">
+        <p>I'm a Business Analyst with an <strong>MSc in Business Analytics (Merit)</strong> from the University of Essex, with hands-on experience across banking, FMCG, and hospitality.</p>
+        <p>At <strong>Eastern Bank Ltd</strong>, I used SQL to analyse 500+ transactions and improve fraud detection by 30%, and evaluated 200+ loan applications with predictive models. At <strong>Unilever Bangladesh</strong>, I built BI dashboards driving supply chain decisions and reduced inventory shortages by 15%.</p>
+        <p>My dissertation applied <strong>XGBoost and logistic regression</strong> to 70,000+ records from 144 countries studying mobile banking's role in women's financial inclusion — achieving a Distinction (75%).</p>
+        <p>I am passionate about financial systems, fraud prevention, and using data to drive decisions that actually matter.</p>
+        <div class="cert-grid">
+          <div class="cert"><div class="cert-badge">BCS</div> BCS Foundation in Business Analysis (FBA)</div>
+          <div class="cert"><div class="cert-badge">PSP</div> PSPO I — Professional Scrum Product Owner</div>
+          <div class="cert"><div class="cert-badge">PBI</div> PL-300 Power BI Associate</div>
+          <div class="cert"><div class="cert-badge">TAB</div> Tableau Desktop Specialist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY / TIMELINE -->
+<section class="section" id="journey">
+  <div class="wrap">
+    <div class="eyebrow">My Journey</div>
+    <h2>Career Timeline</h2>
+    <p class="section-lead">From Dhaka to London — education, internships, and the road to analyst roles.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <div class="timeline-year">2019 — 2023</div>
+          <div class="timeline-role">BSc Economics</div>
+          <div class="timeline-org">North South University · Bangladesh</div>
+          <div class="timeline-detail">Second Class Upper — 79.5%. Core focus on Econometrics, Applied Statistics & Applied Mathematics.</div>
+          <span class="timeline-badge">Education</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <div class="timeline-year">2022 — 2023</div>
+          <div class="timeline-role">Supply Chain Analyst</div>
+          <div class="timeline-org">Unilever Bangladesh · Dhaka</div>
+          <div class="timeline-detail">Built Excel BI dashboards for 3 product lines. Reduced inventory shortages by 15% via BPMN 2.0 process mapping.</div>
+          <span class="timeline-badge">Experience</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <div class="timeline-year">2023 — 2024</div>
+          <div class="timeline-role">Junior Data & Risk Analyst</div>
+          <div class="timeline-org">Eastern Bank Ltd · Dhaka</div>
+          <div class="timeline-detail">SQL fraud detection +30%, credit risk modelling +15%, KYC/AML compliance across 500+ transactions.</div>
+          <span class="timeline-badge">Experience</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <div class="timeline-year">2024 — 2025</div>
+          <div class="timeline-role">MSc Business Analytics</div>
+          <div class="timeline-org">University of Essex · United Kingdom</div>
+          <div class="timeline-detail">Merit. Dissertation Distinction 75% — XGBoost & logistic regression on 71k+ records across 144 countries.</div>
+          <span class="timeline-badge">Education</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <div class="timeline-year">2024 — Present</div>
+          <div class="timeline-role">Operations Supervisor</div>
+          <div class="timeline-org">Daisy Green Collection · London</div>
+          <div class="timeline-detail">SQL KPI monitoring reducing wait times by 15%. Process mapping reduced operational delays by 30%.</div>
+          <span class="timeline-badge">Experience</span>
+        </div>
+      </div>
+
+      <div class="timeline-item current reveal">
+        <div class="timeline-card" style="border-color:var(--green);border-width:1.5px">
+          <div class="timeline-year" style="color:var(--green)">Now — Open to Roles</div>
+          <div class="timeline-role">Seeking Analyst Roles</div>
+          <div class="timeline-org">London, United Kingdom</div>
+          <div class="timeline-detail">Data Analyst · Business Analyst · Risk Analyst. Right to work until February 2028. No sponsorship needed.</div>
+          <span class="timeline-badge" style="background:rgba(34,197,94,.08);color:#16a34a;border-color:rgba(34,197,94,.3)">Available</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="eyebrow">Work History</div>
+    <h2>Experience</h2>
+    <div class="exp-list">
+
+      <article class="exp reveal">
+        <div class="exp-meta">
+          <div class="exp-period">Nov 2024 – Present</div>
+          <div class="exp-co">Daisy Green Collection · London</div>
+        </div>
+        <div>
+          <div class="exp-role">Operations Supervisor</div>
+          <p class="exp-desc">Led daily operations for 200+ customers, boosting service flow and team efficiency by 20%. Mapped staff scheduling processes to identify bottlenecks, reducing delays by 30%. Used SQL to analyse sales and customer-flow data, decreasing average wait times by 15%.</p>
+          <div class="chips">
+            <span class="chip">SQL</span><span class="chip">Process Mapping</span><span class="chip">Team Leadership</span><span class="chip">Operations</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="exp reveal">
+        <div class="exp-meta">
+          <div class="exp-period">Jul 2023 – Jun 2024</div>
+          <div class="exp-co">Eastern Bank Ltd · Dhaka</div>
+        </div>
+        <div>
+          <div class="exp-role">Junior Data & Risk Analyst</div>
+          <p class="exp-desc">Analysed 500+ transactions using SQL, enhancing fraud detection by 30%. Evaluated 200+ loan applications with predictive models, improving credit decision accuracy by 15%. Supported KYC and AML checks on flagged accounts. Prepared 10+ monthly financial reports in Excel & Tableau.</p>
+          <div class="chips">
+            <span class="chip">SQL</span><span class="chip">Fraud Detection</span><span class="chip">Credit Risk</span><span class="chip">KYC · AML</span><span class="chip">Tableau</span><span class="chip">Excel</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="exp reveal">
+        <div class="exp-meta">
+          <div class="exp-period">Jun 2022 – May 2023</div>
+          <div class="exp-co">Unilever Bangladesh · Dhaka</div>
+        </div>
+        <div>
+          <div class="exp-role">Supply Chain Analyst</div>
+          <p class="exp-desc">Elicited requirements and built Excel BI dashboards tracking KPIs across three product lines. Optimised inventory processes, reducing shortages by 15% and minimising excess stock. Mapped As-Is to-Be processes and documented requirements for dashboard delivery.</p>
+          <div class="chips">
+            <span class="chip">Excel BI</span><span class="chip">BPMN 2.0</span><span class="chip">Requirements</span><span class="chip">Supply Chain</span><span class="chip">KPI Dashboards</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Portfolio</div>
+    <h2>Selected Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card featured reveal">
+        <div class="project-num">01 · Dissertation · Distinction 75%</div>
+        <div class="project-title">Mobile Banking & Women's Financial Inclusion</div>
+        <p class="project-desc">I wanted to know if a phone could change a woman's financial life. Using World Bank Global Findex 2021 data — 71,000+ women across 144 countries — I built logistic regression, Random Forest, and XGBoost models to find out. The answer was yes, and the numbers tell a human story.</p>
+        <p class="project-desc" style="margin-top:.5rem">Women with mobile accounts are <strong style="color:var(--accent)">2.9x more likely</strong> to receive wages directly, <strong style="color:var(--accent)">+26.2pp</strong> more likely to have emergency funds, save <strong style="color:var(--accent)">+24pp</strong> more, and borrow <strong style="color:var(--accent)">+19.4pp</strong> more. XGBoost achieved AUC 0.787. Findings delivered as policy recommendations to stakeholders.</p>
+        <div class="chips">
+          <span class="chip">R</span><span class="chip">XGBoost</span><span class="chip">Random Forest</span><span class="chip">Logistic Regression</span><span class="chip">World Bank Findex</span><span class="chip">144 Countries</span>
+        </div>
+        <a href="dissertation.html" class="project-link">Read Full Case Study</a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">02 · MSc Project · Policy Analysis</div>
+        <div class="project-title">G2P Payments & Mobile Financial Access</div>
+        <p class="project-desc">Analysed 144 countries using logistic regression to study Government-to-Person (G2P) payment systems. Found mobile accounts increase G2P transfer receipt by +5.1pp. Policy recommendations delivered to stakeholders on improving last-mile financial access in emerging economies.</p>
+        <div class="chips"><span class="chip">Logistic Regression</span><span class="chip">144 Countries</span><span class="chip">Policy Analysis</span><span class="chip">R</span><span class="chip">World Bank</span></div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">03 · Banking Analytics</div>
+        <div class="project-title">SQL Fraud Detection System</div>
+        <p class="project-desc">Real-world fraud detection across 500+ banking transactions at Eastern Bank Ltd. Improved detection accuracy by 30% through structured query analysis and pattern recognition.</p>
+        <div class="chips"><span class="chip">SQL</span><span class="chip">Risk Analysis</span><span class="chip">Banking</span></div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">04 · Supply Chain</div>
+        <div class="project-title">Unilever Inventory BI Dashboard</div>
+        <p class="project-desc">Excel BI dashboards driving strategic decisions across three product lines. Reduced inventory shortages by 15% through process optimisation and requirements documentation.</p>
+        <div class="chips"><span class="chip">Excel</span><span class="chip">BPMN</span><span class="chip">Dashboard</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY HIRE ME -->
+<section class="section" id="fit">
+  <div class="wrap">
+    <div class="eyebrow">Why hire me</div>
+    <h2>Built for analyst roles.<br><em style="font-style:italic;color:var(--accent)">Proven in the field.</em></h2>
+    <p class="section-lead">Every skill below comes from real work — not coursework. Here's how my background maps directly to what analyst roles require.</p>
+
+    <div class="fit-opener reveal">
+      <div class="fit-opener-statement">Every requirement. Matched. Here's the proof.</div>
+      <p class="fit-opener-why">My dissertation studying mobile banking access across 71,000+ records in 144 countries wasn't just academic — it showed me exactly what happens when people are locked out of financial systems. That's why I want to work in banking and fintech. Not just to analyse data, but because the work actually matters.</p>
+    </div>
+
+    <div class="fit-grid reveal">
+      <div class="fit-header-row">
+        <span>What roles require</span>
+        <span></span>
+        <span>My evidence</span>
+      </div>
+
+      <div class="fit-row" data-delay="0">
+        <div class="fit-req">Fraud detection &amp; transaction monitoring</div>
+        <div class="fit-check">
+          <div class="fit-line-left"></div>
+          <div class="check-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="fit-line-right"></div>
+        </div>
+        <div class="fit-evidence">
+          <strong>Eastern Bank Ltd — SQL fraud analysis</strong>
+          <span>Detection accuracy improved by 30% across 500+ transactions</span>
+          <div><span class="fit-badge">Banking · KYC · AML</span></div>
+        </div>
+      </div>
+
+      <div class="fit-row" data-delay="100">
+        <div class="fit-req">Machine learning &amp; predictive modelling</div>
+        <div class="fit-check">
+          <div class="fit-line-left"></div>
+          <div class="check-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="fit-line-right"></div>
+        </div>
+        <div class="fit-evidence">
+          <strong>MSc Dissertation — XGBoost &amp; Logistic Regression</strong>
+          <span>AUC 0.787 · 71,000+ records · 144 countries · Distinction 75%</span>
+          <div><span class="fit-badge">R · XGBoost · World Bank</span></div>
+        </div>
+      </div>
+
+      <div class="fit-row" data-delay="200">
+        <div class="fit-req">Data reporting &amp; BI dashboards</div>
+        <div class="fit-check">
+          <div class="fit-line-left"></div>
+          <div class="check-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="fit-line-right"></div>
+        </div>
+        <div class="fit-evidence">
+          <strong>Unilever Bangladesh — Excel BI dashboards</strong>
+          <span>Tracked KPIs across 3 product lines · reduced shortages 15%</span>
+          <div><span class="fit-badge">Power BI · Tableau · Excel</span></div>
+        </div>
+      </div>
+
+      <div class="fit-row" data-delay="300">
+        <div class="fit-req">Process analysis &amp; improvement</div>
+        <div class="fit-check">
+          <div class="fit-line-left"></div>
+          <div class="check-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="fit-line-right"></div>
+        </div>
+        <div class="fit-evidence">
+          <strong>Daisy Green &amp; Unilever — BPMN 2.0 process mapping</strong>
+          <span>Operational delays reduced 30% · As-Is to To-Be documented</span>
+          <div><span class="fit-badge">BPMN 2.0 · Process Optimisation</span></div>
+        </div>
+      </div>
+
+      <div class="fit-row" data-delay="400">
+        <div class="fit-req">KYC / AML compliance knowledge</div>
+        <div class="fit-check">
+          <div class="fit-line-left"></div>
+          <div class="check-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="fit-line-right"></div>
+        </div>
+        <div class="fit-evidence">
+          <strong>Eastern Bank Ltd — compliance checks on flagged accounts</strong>
+          <span>Hands-on KYC/AML in a regulated banking environment</span>
+          <div><span class="fit-badge">KYC · AML · Risk</span></div>
+        </div>
+      </div>
+
+      <div class="fit-row" data-delay="500">
+        <div class="fit-req">Stakeholder reporting &amp; communication</div>
+        <div class="fit-check">
+          <div class="fit-line-left"></div>
+          <div class="check-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="fit-line-right"></div>
+        </div>
+        <div class="fit-evidence">
+          <strong>Eastern Bank &amp; Unilever — 10+ monthly management reports</strong>
+          <span>Delivered to senior stakeholders in Excel, Tableau &amp; written briefs</span>
+          <div><span class="fit-badge">Stakeholder Mgmt · BA</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="fit-note">Right to work in the UK until February 2028 · No sponsorship required · Open to banking, fintech &amp; BI roles</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Capabilities</div>
+    <h2>Skills</h2>
+    <p class="section-lead">A recruiter-friendly overview of my technical and analytical toolkit.</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <h3>Data & Analytics</h3>
+        <div class="chips">
+          <span class="chip">SQL</span><span class="chip">Python</span><span class="chip">R</span><span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Excel</span><span class="chip">XGBoost</span><span class="chip">Predictive Modelling</span><span class="chip">Data Modelling</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3>Business Analysis</h3>
+        <div class="chips">
+          <span class="chip">Stakeholder Management</span><span class="chip">BPMN 2.0</span><span class="chip">User Stories</span><span class="chip">UAT</span><span class="chip">Acceptance Criteria</span><span class="chip">Process Optimisation</span><span class="chip">Wireframing</span><span class="chip">JIRA</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3>Risk & Finance</h3>
+        <div class="chips">
+          <span class="chip">Credit Risk</span><span class="chip">Fraud Detection</span><span class="chip">KYC</span><span class="chip">AML</span><span class="chip">Financial Modelling</span><span class="chip">Transaction Monitoring</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3>Certifications</h3>
+        <div class="chips">
+          <span class="chip">BCS FBA</span><span class="chip">PSPO I</span><span class="chip">PL-300 Power BI</span><span class="chip">Tableau Specialist</span><span class="chip">PRINCE2 Foundation</span><span class="chip">ECBA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Get In Touch</div>
+    <h2>Let's Work Together</h2>
+    <p class="section-lead">Open to analyst roles in banking, fintech, and BI. Based in London. No sponsorship needed.</p>
+    <div class="contact-wrap">
+      <div class="contact-card reveal">
+        <p style="color:var(--muted);font-size:.92rem;margin-bottom:1rem">Available for business analyst, data analyst, BI analyst, risk analyst, and fraud analyst roles. Open to both in-person and remote positions.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="https://saiful-islamy.github.io/CV_Saiful_Islam.pdf" target="_blank" rel="noopener">
+            <strong>⬇ Download CV</strong><span>PDF · One click</span>
+          </a>
+          <a class="contact-link" href="https://linkedin.com/in/saifuly" target="_blank" rel="noopener">
+            <strong>LinkedIn</strong><span>linkedin.com/in/saifuly</span>
+          </a>
+          <a class="contact-link" href="https://github.com/saiful-islamy" target="_blank" rel="noopener">
+            <strong>GitHub</strong><span>github.com/saiful-islamy</span>
+          </a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="rtw-card">
+          <h3>Right to Work — UK</h3>
+          <p>Graduate Route visa valid until February 2028. No sponsorship currently required for eligible roles anywhere in the United Kingdom.</p>
+          <div class="rtw-date">GRADUATE ROUTE VISA · VALID UNTIL FEB 2028</div>
+        </div>
+        <div class="contact-card" style="margin-top:1.25rem">
+          <div class="avail" style="margin-bottom:.75rem">
+            <div class="dot"></div>
+            <strong style="font-size:.88rem">Currently available</strong>
+          </div>
+          <p style="color:var(--muted);font-size:.84rem">Response time: usually within 24 hours via LinkedIn.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Saiful Islam · London, UK</span>
+    <span>Business Analyst &amp; Data Analyst</span>
+    <span><a href="https://github.com/saiful-islamy">GitHub</a> · <a href="https://linkedin.com/in/saifuly">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── THEME TOGGLE (persistent via localStorage) ──
+const root = document.documentElement;
+const btn = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const SUN = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+const MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+let dark = localStorage.getItem('theme')
+  ? localStorage.getItem('theme') === 'dark'
+  : window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+function applyTheme() {
+  root.setAttribute('data-theme', dark ? 'dark' : 'light');
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+  icon.innerHTML = dark ? SUN : MOON;
+  btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+}
+applyTheme();
+btn.addEventListener('click', () => { dark = !dark; applyTheme(); });
+
+// ── HAMBURGER MENU ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-cv');
+
+function openMenu() {
+  hamburger.classList.add('open');
+  mobileMenu.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.contains('open') ? closeMenu() : openMenu();
+});
+
+mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+// Close on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+// ── SCROLL REVEAL ──
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+els.forEach(el => obs.observe(el));
+
+// ── WHY HIRE ME ANIMATION ──
+const fitRows = document.querySelectorAll('.fit-row');
+const fitObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay) || 0;
+      setTimeout(() => entry.target.classList.add('fit-visible'), delay);
+      fitObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+fitRows.forEach(row => fitObs.observe(row));
+
+// ── ACTIVE NAV HIGHLIGHT ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+  });
+  navLinks.forEach(l => {
+    l.style.color = l.getAttribute('href') === `#${cur}` ? 'var(--text)' : '';
+  });
+}, { passive: true });
+
+// ── HIDE HIRE ME ON MOBILE (show hamburger instead) ──
+function checkMobile() {
+  const hire = document.getElementById('desktopHire');
+  if (!hire) return;
+  hire.style.display = window.innerWidth > 900 ? 'inline-flex' : 'none';
+}
+checkMobile();
+window.addEventListener('resize', checkMobile, { passive: true });
+</script>
+</body>
+</html>
