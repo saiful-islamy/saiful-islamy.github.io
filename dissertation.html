@@ -57,9 +57,26 @@ a:hover{text-decoration:underline}
 .case-tag::before{content:'';width:1.2rem;height:1px;background:var(--accent);display:block}
 .case-title{font-family:'Lora',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
 .case-subtitle{font-size:1.05rem;color:var(--muted);max-width:52ch;margin-bottom:2rem;line-height:1.7}
-.case-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
-.meta-item{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.06em;color:var(--faint)}
-.meta-item strong{color:var(--text);display:block;font-size:.8rem;margin-bottom:.15rem}
+.case-meta{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border-radius:var(--r);overflow:hidden;margin-bottom:2rem;
+}
+.meta-card{
+  background:var(--surface);padding:1rem 1.25rem;
+}
+.meta-label{
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--faint);margin-bottom:.35rem;
+}
+.meta-value{
+  font-size:.88rem;font-weight:500;color:var(--text);
+  line-height:1.4;
+}
+@media(max-width:600px){
+  .case-meta{grid-template-columns:repeat(2,1fr)}
+}
 
 /* STATS BANNER */
 .stats-banner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden;margin:2.5rem 0}
@@ -139,12 +156,30 @@ p strong{color:var(--text);font-weight:500}
     <h1 class="case-title">Does a Phone Change a Woman's Financial Life?</h1>
     <p class="case-subtitle">A global machine learning study across 71,000+ women in 144 countries — examining whether mobile banking access translates into real financial empowerment.</p>
     <div class="case-meta">
-      <div class="meta-item"><strong>Dataset</strong>World Bank Global Findex 2021</div>
-      <div class="meta-item"><strong>Scope</strong>71,000+ women · 144 countries</div>
-      <div class="meta-item"><strong>Methods</strong>Logistic Regression · XGBoost · Random Forest</div>
-      <div class="meta-item"><strong>Best Model AUC</strong>0.787</div>
-      <div class="meta-item"><strong>Supervisor</strong>Dr Shamsul Karim · Essex Business School</div>
-      <div class="meta-item"><strong>Grade</strong>Distinction (75%)</div>
+      <div class="meta-card">
+        <div class="meta-label">Dataset</div>
+        <div class="meta-value">World Bank Global Findex 2021</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Scope</div>
+        <div class="meta-value">71,000+ women · 144 countries</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Methods</div>
+        <div class="meta-value">Logistic Regression · XGBoost · Random Forest</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Best Model AUC</div>
+        <div class="meta-value">0.787</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Supervisor</div>
+        <div class="meta-value">Dr Shamsul Karim · Essex Business School</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Grade</div>
+        <div class="meta-value" style="color:var(--accent);font-weight:600">Distinction (75%)</div>
+      </div>
     </div>
 
     <div class="stats-banner">
