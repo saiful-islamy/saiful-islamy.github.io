@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dissertation Case Study — Saiful Islam</title>
+<meta name="description" content="Case study: Does access to mobile banking enhance women's financial inclusion? A global ML analysis by Saiful Islam, University of Essex."/>
+<meta property="og:title" content="Mobile Banking & Women's Financial Inclusion — Saiful Islam"/>
+<meta property="og:description" content="A global ML study across 71,000+ women in 144 countries. XGBoost AUC 0.787. Distinction 75% — University of Essex."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://saiful-islamy.github.io/dissertation.html"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>"/>
+<script>
+(function(){
+  var s = localStorage.getItem('theme');
+  var d = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ef;--surface:#ffffff;--surface2:#f0ede7;--border:#e2ddd6;
+  --text:#1a1814;--muted:#6b6660;--faint:#9b9790;
+  --accent:#b84a1e;--accent2:#1e4d6b;--green:#22c55e;
+  --shadow:0 2px 16px rgba(26,24,20,.07);--shadow-lg:0 8px 40px rgba(26,24,20,.10);
+  --r:0.5rem;--r-full:9999px;--trans:180ms cubic-bezier(.16,1,.3,1);--max:780px;
+}
+[data-theme="dark"]{
+  --bg:#141210;--surface:#1c1a17;--surface2:#222018;--border:#2e2c28;
+  --text:#e8e4dc;--muted:#a8a49c;--faint:#6e6a62;
+  --accent:#e06535;--accent2:#5ba8c8;
+  --shadow:0 2px 16px rgba(0,0,0,.3);--shadow-lg:0 8px 40px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:1rem;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{width:min(calc(100% - 2.5rem),var(--max));margin-inline:auto}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+.logo{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:var(--text)}
+.logo span{color:var(--accent)}
+.back-link{font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:.4rem}
+.back-link:hover{color:var(--text);text-decoration:none}
+.theme-btn{width:2.25rem;height:2.25rem;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.theme-btn svg{width:1rem;height:1rem;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* HERO */
+.case-hero{padding:4rem 0 3rem;border-bottom:1px solid var(--border)}
+.case-tag{font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.case-tag::before{content:'';width:1.2rem;height:1px;background:var(--accent);display:block}
+.case-title{font-family:'Lora',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
+.case-subtitle{font-size:1.05rem;color:var(--muted);max-width:52ch;margin-bottom:2rem;line-height:1.7}
+.case-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.meta-item{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.06em;color:var(--faint)}
+.meta-item strong{color:var(--text);display:block;font-size:.8rem;margin-bottom:.15rem}
+
+/* STATS BANNER */
+.stats-banner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden;margin:2.5rem 0}
+.stat-box{background:var(--surface);padding:1.25rem 1rem;text-align:center}
+.stat-n{font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:.3rem}
+.stat-l{font-family:'DM Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);line-height:1.4}
+@media(max-width:600px){.stats-banner{grid-template-columns:repeat(2,1fr)}}
+
+/* CONTENT */
+.case-body{padding:3rem 0}
+.case-section{margin-bottom:3rem}
+.section-label{font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.section-label::before{content:'';width:1rem;height:1px;background:var(--accent);display:block}
+h2{font-family:'Lora',serif;font-size:1.5rem;font-weight:600;letter-spacing:-.01em;margin-bottom:1rem;color:var(--text)}
+p{color:var(--muted);margin-bottom:1rem;font-size:.97rem}
+p strong{color:var(--text);font-weight:500}
+
+/* PULL QUOTE */
+.pull-quote{border-left:3px solid var(--accent);padding:1rem 1.5rem;margin:2rem 0;background:var(--surface);border-radius:0 var(--r) var(--r) 0}
+.pull-quote p{font-family:'Lora',serif;font-style:italic;font-size:1.05rem;color:var(--text);margin:0;line-height:1.7}
+
+/* BEFORE/AFTER */
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden;margin:1.5rem 0}
+.ba-col{background:var(--surface);padding:1.5rem}
+.ba-label{font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;display:block}
+.ba-label.without{color:var(--faint)}
+.ba-label.with{color:var(--accent)}
+.ba-item{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.75rem;font-size:.88rem}
+.ba-item .num{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;color:var(--accent)}
+.ba-item .desc{color:var(--muted)}
+@media(max-width:520px){.before-after{grid-template-columns:1fr}}
+
+/* METHODOLOGY STEPS */
+.method-steps{display:flex;flex-direction:column;gap:0;margin:1.5rem 0}
+.method-step{display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--border);align-items:start}
+.method-step:last-child{border-bottom:none}
+.step-num{font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;color:var(--accent);padding-top:.15rem}
+.step-title{font-size:.92rem;font-weight:500;color:var(--text);margin-bottom:.3rem}
+.step-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.chip{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding:.28rem .65rem;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-full);color:var(--muted)}
+
+/* BANKING RELEVANCE */
+.relevance-box{background:var(--text);color:var(--bg);border-radius:var(--r);padding:2rem;margin:2rem 0}
+.relevance-box h3{font-family:'Lora',serif;font-size:1.2rem;font-weight:600;margin-bottom:1rem;color:var(--bg)}
+.relevance-box p{color:color-mix(in srgb,var(--bg) 70%,transparent);margin-bottom:.75rem;font-size:.9rem}
+.relevance-box p:last-child{margin-bottom:0}
+
+/* FOOTER */
+.case-footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.case-footer span{font-size:.85rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.4rem;border-radius:var(--r-full);font-size:.82rem;font-weight:500;border:1px solid transparent;transition:all var(--trans)}
+.btn-primary{background:var(--text);color:var(--bg)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent);text-decoration:none}
+.btn-ghost{background:var(--surface);border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--muted);text-decoration:none}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo">Saiful<span>.</span></a>
+    <a href="index.html" class="back-link">← Back to portfolio</a>
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+<section class="case-hero">
+  <div class="wrap">
+    <div class="case-tag">MSc Dissertation · Distinction 75% · University of Essex</div>
+    <h1 class="case-title">Does a Phone Change a Woman's Financial Life?</h1>
+    <p class="case-subtitle">A global machine learning study across 71,000+ women in 144 countries — examining whether mobile banking access translates into real financial empowerment.</p>
+    <div class="case-meta">
+      <div class="meta-item"><strong>Dataset</strong>World Bank Global Findex 2021</div>
+      <div class="meta-item"><strong>Scope</strong>71,000+ women · 144 countries</div>
+      <div class="meta-item"><strong>Methods</strong>Logistic Regression · XGBoost · Random Forest</div>
+      <div class="meta-item"><strong>Best Model AUC</strong>0.787</div>
+      <div class="meta-item"><strong>Supervisor</strong>Dr Shamsul Karim · Essex Business School</div>
+      <div class="meta-item"><strong>Grade</strong>Distinction (75%)</div>
+    </div>
+
+    <div class="stats-banner">
+      <div class="stat-box">
+        <div class="stat-n">4.81×</div>
+        <div class="stat-l">More likely to have emergency funds</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n">+26.2pp</div>
+        <div class="stat-l">Higher emergency fund access (AME)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n">+24pp</div>
+        <div class="stat-l">Higher savings rate (AME)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n">0.787</div>
+        <div class="stat-l">XGBoost AUC — best model performance</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-body">
+  <div class="wrap">
+
+    <div class="case-section">
+      <div class="section-label">The Problem</div>
+      <h2>700 million women locked out of the financial system</h2>
+      <p>Despite decades of financial inclusion efforts, a persistent gender gap remains. Globally, women are significantly less likely than men to hold a bank account, receive wages formally, save, or access credit. This isn't just unfair — it traps families in poverty cycles and limits entire economies.</p>
+      <p>Mobile banking promised a solution. A phone, an agent network, and a SIM card could theoretically replace a branch and bypass the social barriers — husband's permission, distance, documentation — that kept women out. But did it actually work? That's what this research set out to measure.</p>
+      <div class="pull-quote">
+        <p>"The question wasn't whether mobile banking existed. It was whether it changed anything for the women who had it."</p>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <div class="section-label">The Human Story</div>
+      <h2>What the numbers actually mean</h2>
+      <p>Before the methodology, here's what the findings mean in plain terms:</p>
+      <div class="before-after">
+        <div class="ba-col">
+          <span class="ba-label without">Without mobile banking</span>
+          <div class="ba-item"><span class="desc">Wages often handed to male relatives in cash</span></div>
+          <div class="ba-item"><span class="desc">One illness or emergency can devastate a household</span></div>
+          <div class="ba-item"><span class="desc">Savings kept at home — vulnerable to loss or pressure</span></div>
+          <div class="ba-item"><span class="desc">Credit access depends on informal, high-interest lenders</span></div>
+        </div>
+        <div class="ba-col">
+          <span class="ba-label with">With mobile banking</span>
+          <div class="ba-item"><span class="num">4.81×</span><span class="desc">more likely to have emergency funds</span></div>
+          <div class="ba-item"><span class="num">2.90×</span><span class="desc">more likely to save formally</span></div>
+          <div class="ba-item"><span class="num">2.89×</span><span class="desc">more likely to receive wages directly</span></div>
+          <div class="ba-item"><span class="num">2.28×</span><span class="desc">more likely to access formal credit</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <div class="section-label">Methodology</div>
+      <h2>How I approached the analysis</h2>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Data sourcing & cleaning</div>
+            <div class="step-desc">Downloaded female-only microdata from the World Bank Global Findex 2021 survey — 71,000+ respondents across 144 countries. Cleaned missing values, standardised country-level variables (female labour force participation, internet penetration, mobile agent density), and engineered binary outcome variables for six financial behaviours.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">Theoretical framework</div>
+            <div class="step-desc">Grounded the analysis in Kabeer's (1999) Resources-Agency-Achievements empowerment framework — treating mobile account ownership as the resource, and the six financial outcomes (wages, savings, borrowing, emergency funds, G2P transfers, mobile payments) as measurable achievements.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Logistic regression modelling</div>
+            <div class="step-desc">Built six separate logistic regression models — one per financial outcome — controlling for age, education, income quintile, employment, and country-level contextual variables. Calculated Average Marginal Effects (AME) to quantify the percentage-point impact of mobile account ownership on each outcome.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Machine learning validation</div>
+            <div class="step-desc">Trained and compared three ML models — Logistic Regression, Random Forest, and XGBoost — using 70/30 train-test split with cross-validation. XGBoost achieved the best performance with AUC 0.787, confirming the predictive power of mobile account ownership on savings behaviour. Feature importance analysis confirmed mobile account as the strongest predictor across all models.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">05</div>
+          <div>
+            <div class="step-title">Policy recommendations</div>
+            <div class="step-desc">Translated findings into actionable recommendations for policymakers, financial institutions, and NGOs — focusing on agent network density, female labour force participation, and digital infrastructure as the key enablers of impact.</div>
+          </div>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="chip">R</span><span class="chip">XGBoost</span><span class="chip">Random Forest</span><span class="chip">Logistic Regression</span><span class="chip">World Bank Findex 2021</span><span class="chip">AME</span><span class="chip">Cross-validation</span><span class="chip">Feature Importance</span><span class="chip">Policy Analysis</span>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <div class="section-label">Key Findings</div>
+      <h2>What the data showed</h2>
+      <p>Mobile account ownership had a <strong>statistically significant positive effect</strong> on all six financial outcomes studied. The strongest effects were on wage receipt (2.9x) and emergency fund access (+26.2pp) — both directly relevant to household financial resilience.</p>
+      <p>Context mattered. Effects were <strong>stronger in countries</strong> with higher female labour force participation, better digital infrastructure, and denser mobile agent networks. This shows that mobile banking alone isn't enough — the enabling environment determines the impact.</p>
+      <p>Age-related disparities and weaker borrowing effects highlighted that <strong>empowerment through digital finance is conditional</strong>, not automatic. Older women and those in low-connectivity regions saw smaller gains.</p>
+    </div>
+
+    <div class="relevance-box">
+      <h3>Why this matters for banking & fintech roles</h3>
+      <p>This research isn't just academic. Understanding how financial access changes real behaviour — savings patterns, wage routing, credit uptake — is exactly what product teams, risk analysts, and fraud detection units in fintech need to build better systems.</p>
+      <p>The methodology — cleaning messy real-world survey data, building and comparing multiple ML models, quantifying marginal effects, translating findings for non-technical stakeholders — mirrors the day-to-day work of a data or business analyst in a financial institution.</p>
+      <p>The findings directly inform questions like: Who should we target for financial products? What predicts savings behaviour? How do we measure financial inclusion impact? These are live questions at every bank and fintech operating in emerging markets.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="case-footer">
+    <span>Saiful Islam · MSc Business Analytics · University of Essex · 2025</span>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <a href="https://saiful-islamy.github.io/CV_Saiful_Islam.pdf" target="_blank" class="btn btn-ghost">⬇ Download CV</a>
+      <a href="index.html" class="btn btn-primary">← Back to Portfolio</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<script>
+const root = document.documentElement;
+const btn = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const SUN = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+const MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+let dark = localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+function applyTheme(){root.setAttribute('data-theme',dark?'dark':'light');localStorage.setItem('theme',dark?'dark':'light');icon.innerHTML=dark?SUN:MOON;}
+applyTheme();
+btn.addEventListener('click',()=>{dark=!dark;applyTheme();});
+</script>
+</body>
+</html>
